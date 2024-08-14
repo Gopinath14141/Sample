@@ -4,13 +4,10 @@ import numpy as np
 from faker import Faker
 import plotly.express as px
 import matplotlib.pyplot as plt
+import streamlit.components.v1 as components
 
 # Initialize Faker to generate synthetic data
 faker = Faker()
-
-st.markdown("""<link rel='stylesheet' href='https://bots.kore.ai/webclient/UI/dist/kore-ai-sdk.min.css'></link>
-<script src='https://bots.kore.ai/api/platform/websdkjs/ce2c77b5242f4711bcb59a2dc1cb55d3be4f0456fa79428e834c982c3c383a50st22'></script>
-<script>KoreSDK.show(KoreSDK.chatConfig);</script>""",unsafe_allow_html=True)
 
 # Function to generate sample patient data
 def generate_patient_data(num_patients=100):
@@ -107,10 +104,19 @@ def resource_management():
     st.write("Bed Availability:")
     st.write(bed_availability)
 
+# Function to embed KoreAI chatbot
+def embed_chatbot():
+    chatbot_code = """
+    <link rel='stylesheet' href='https://bots.kore.ai/webclient/UI/dist/kore-ai-sdk.min.css'></link>
+    <script src='https://bots.kore.ai/api/platform/websdkjs/ce2c77b5242f4711bcb59a2dc1cb55d3be4f0456fa79428e834c982c3c383a50st22'></script>
+    <script>KoreSDK.show(KoreSDK.chatConfig);</script>
+    """
+    components.html(chatbot_code, height=600)
+
 # Main application
 def main():
     st.sidebar.title("Navigation")
-    menu = ["Patient Data", "Predictive Model", "Resource Management", "Patient Data Dashboard"]
+    menu = ["Patient Data", "Predictive Model", "Resource Management", "Patient Data Dashboard", "Chatbot"]
     choice = st.sidebar.selectbox("Select a page", menu)
     
     if choice == "Patient Data":
@@ -122,6 +128,8 @@ def main():
     elif choice == "Patient Data Dashboard":
         patient_data = display_patient_data()
         display_charts(patient_data)
+    elif choice == "Chatbot":
+        embed_chatbot()
 
 if __name__ == "__main__":
     main()
