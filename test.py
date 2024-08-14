@@ -114,22 +114,19 @@ def embed_chatbot():
     components.html(chatbot_code, height=600)
 
 # Main application
-def main():
-    st.sidebar.title("Navigation")
-    menu = ["Patient Data", "Predictive Model", "Resource Management", "Patient Data Dashboard", "Chatbot"]
-    choice = st.sidebar.selectbox("Select a page", menu)
-    
-    if choice == "Patient Data":
-        patient_data = display_patient_data()
-    elif choice == "Predictive Model":
-        predictive_model_interface()
-    elif choice == "Resource Management":
-        resource_management()
-    elif choice == "Patient Data Dashboard":
-        patient_data = display_patient_data()
-        display_charts(patient_data)
-    elif choice == "Chatbot":
-        embed_chatbot()
 
-if __name__ == "__main__":
-    main()
+st.sidebar.title("Navigation")
+menu = ["Patient Data", "Predictive Model", "Resource Management", "Patient Data Dashboard", "Chatbot"]
+choice = st.sidebar.selectbox("Select a page", menu)
+
+if choice == "Patient Data":
+    patient_data = display_patient_data()
+elif choice == "Predictive Model":
+    predictive_model_interface()
+elif choice == "Resource Management":
+    resource_management()
+elif choice == "Patient Data Dashboard":
+    patient_data = display_patient_data()
+    display_charts(patient_data)
+
+embed_chatbot()
